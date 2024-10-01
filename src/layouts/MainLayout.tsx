@@ -6,7 +6,7 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = () => {
   return (
     <>
-    <div className="w-full h-full bg-red-500">
+    <div className="w-full h-full bg-red-500 flex">
       <Outlet/>
     </div>
 		</>

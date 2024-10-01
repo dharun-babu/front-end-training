@@ -49,7 +49,7 @@ const LoginFormComponents: React.FC<LoginFormProps> = ({ onLogin }) => {
           placeholder="Enter your password"
         />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-row items-center justify-center">
         <Button type="submit">Sign In</Button>
       </div>
     </form>
