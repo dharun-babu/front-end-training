@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
-import { ProductContextType, QuantityControl, CartItem } from "../utilies/Types";
+import { ProductContextType, QuantityControl, CartItem } from "../utilies/type/Types";
 
 const QuantityControlComponents = ({
   productId,

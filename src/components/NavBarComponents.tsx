@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navItems } from '../data/NavItemsData';
-import { ProductContext} from '../contexts/ProductContext';
-import { ProductContextType } from '../utilies/Types';
+import { ProductContext } from '../contexts/ProductContext';
+import { ProductContextType } from '../utilies/type/Types';
 
 const NavBarComponents = () => {
   const { calculateCartCount, calculateWishlistCount } = useContext(ProductContext) as ProductContextType;
@@ -17,8 +17,8 @@ const NavBarComponents = () => {
               {item.text}
               {(item.text === 'Cart' && calculateCartCount() > 0) ||
               (item.text === 'Wishlist' && calculateWishlistCount() > 0) ? (
-                <span className="ml-1 text-sm text-white">
-                  {item.text === 'Cart' ? `(${calculateCartCount()})` : `(${calculateWishlistCount()})`}
+                <span className="ml-1 text-md text-white rounded-full bg-red-500 px-2">
+                  {item.text === 'Cart' ? calculateCartCount() : calculateWishlistCount()}
                 </span>
               ) : null}
             </NavLink>

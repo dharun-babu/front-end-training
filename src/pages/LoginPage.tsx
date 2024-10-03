@@ -1,4 +1,4 @@
-import { LoginPageProps } from "../utilies/Types";
+import { LoginPageProps } from "../utilies/type/Types";
 import LoginFormComponents from "../components/LoginFormComponents";
 
 const LoginPage = ({ onLogin }: LoginPageProps) => {

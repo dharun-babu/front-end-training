@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProductContext} from '../contexts/ProductContext';
-import { ProductContextType, CartItem } from '../utilies/Types';
+import { ProductContextType, CartItem } from '../utilies/type/Types';
 import Button from '../components/storyComponents/Button';
 import QuantityControlComponents from './QuantityControlComponents';
 

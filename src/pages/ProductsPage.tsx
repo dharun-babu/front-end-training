@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProductContext } from '../contexts/ProductContext';
-import { ProductContextType, Product } from '../utilies/Types';
+import { ProductContextType, Product } from '../utilies/type/Types';
 import ProductDisplay from '../components/ProductComponents';
 
 const ProductsPage = () => {

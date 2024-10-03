@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProductContext } from '../contexts/ProductContext';
-import { ProductContextType, WishlistItem } from '../utilies/Types';
+import { ProductContextType, WishlistItem } from '../utilies/type/Types';
 import WishlistComponents from '../components/WishListComponents';
 
 const WishlistPage = () => {

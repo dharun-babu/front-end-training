@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ProductContext} from '../contexts/ProductContext';
 import Button from '../components/storyComponents/Button';
-import { ProductContextType, WishlistItem } from '../utilies/Types';
+import { ProductContextType, WishlistItem } from '../utilies/type/Types';
 
 interface Props {
   item: WishlistItem;
