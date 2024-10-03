@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { ProductContext, WishlistItem } from '../contexts/ProductContext';
+import { ProductContext } from '../contexts/ProductContext';
+import { ProductContextType, WishlistItem } from '../utilies/Types';
 import WishlistComponents from '../components/WishListComponents';
 
 const WishlistPage = () => {
-  const { wishlistItems } = useContext(ProductContext) || { wishlistItems: [] };
+  const { wishlistItems } = useContext(ProductContext) as ProductContextType;
 
   if (!wishlistItems) {
     return <div>Loading...</div>;

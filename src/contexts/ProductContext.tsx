@@ -1,38 +1,10 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { Products } from '../data/ProductsDate';
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-}
-
-export interface CartItem extends Product {
-  count: number;
-  total: number;
-}
-
-export interface WishlistItem extends Product {}
-
-export interface ProductContextType {
-  products: Product[];
-  cartItems: CartItem[];
-  wishlistItems: WishlistItem[];
-  addToCart: (product: Product) => void;
-	decrementFromCart: (ProductId : number) => void;
-  removeFromCart: (productId: number) => void;
-  calculateTotalPrice: () => number;
-  calculateCartCount: () => number;
-  addToWishlist: (product: Product) => void;
-  removeFromWishlist: (productId: number) => void;
-  isInWishlist: (productId: number) => boolean;
-	calculateWishlistCount: () => number;
-}
+import { Product, CartItem, WishlistItem, ProductContextType } from '../utilies/Types';
 
 export const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
-const ProductContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ProductContextProvider = ({ children } : any) => {
   const [products] = useState<Product[]>(Products);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
@@ -77,7 +49,7 @@ const ProductContextProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.total, 0);
+    return cartItems.reduce((total, item) => total + item.total + 10, 0);
   };
 
 	const calculateCartCount = () => {

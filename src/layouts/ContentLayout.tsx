@@ -3,7 +3,7 @@ import DisplayContext from "./DisplayContext";
 
 function ContentLayout() {
   return (
-    <main className="w-full min-h-screen bg-gray-100">
+    <main className="w-full min-h-screen bg-gray-200">
       <div className="w-full h-1/12">
         <NavBarComponents />
       </div>

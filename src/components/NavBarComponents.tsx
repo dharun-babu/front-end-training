@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navItems } from '../data/NavItemsData';
-import { ProductContext, ProductContextType } from '../contexts/ProductContext';
+import { ProductContext} from '../contexts/ProductContext';
+import { ProductContextType } from '../utilies/Types';
 
 const NavBarComponents = () => {
   const { calculateCartCount, calculateWishlistCount } = useContext(ProductContext) as ProductContextType;

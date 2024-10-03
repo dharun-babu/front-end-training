@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { ProductContext, WishlistItem } from '../contexts/ProductContext';
+import { useContext } from 'react';
+import { ProductContext} from '../contexts/ProductContext';
 import Button from '../components/storyComponents/Button';
+import { ProductContextType, WishlistItem } from '../utilies/Types';
 
 interface Props {
   item: WishlistItem;
 }
 
-const WishlistComponents: React.FC<Props> = ({ item }) => {
-  const { removeFromWishlist } = useContext(ProductContext) as any;
+const WishlistComponents = ({ item } : Props) => {
+  const { removeFromWishlist } = useContext(ProductContext) as ProductContextType;
 
   const handleRemoveFromWishlist = (productId: number) => {
     removeFromWishlist(productId);
