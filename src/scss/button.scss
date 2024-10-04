@@ -1,0 +1,85 @@
+$blue-500: #3b82f6;
+$blue-700: #1d4ed8;
+$gray-500: #6c757d;
+$gray-700: #374151;
+$red-500: #ef4444;
+$red-700: #b91c1c;
+$green-500: #22c55e;
+$green-700: #15803d;
+$white: #ffffff;
+
+.sm {
+	padding: 0.5rem 0.8rem;
+}
+
+.md {
+  padding: 0.5rem 1rem;
+}
+
+.button {
+  display: inline-block;
+	justify-content: center;
+	align-items: center;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  border: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.primary {
+  @extend .button;
+  background-color: $blue-500;
+  color: $white;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $blue-700;
+  }
+}
+
+.secondary {
+  @extend .button;
+  background-color: $gray-500;
+  color: $white;
+
+  &:hover {
+    background-color: $gray-700;
+  }
+}
+
+.danger {
+	@extend .button;
+	background-color: $red-500;
+	color: $white;
+
+	&:hover {
+		background-color: $red-700;
+	}
+}
+
+.success{
+	@extend .button;
+	background-color: $green-500;
+	color: $white;
+
+	&:hover{
+		background-color: $green-700;
+	}
+}
+
+.no-style{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: $white;
+}
+

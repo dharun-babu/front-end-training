@@ -19,7 +19,7 @@ export interface ProductContextType {
   addToCart: (product: Product) => void;
 	decrementFromCart: (ProductId : number) => void;
   removeFromCart: (productId: number) => void;
-  calculateTotalPrice: () => number;
+  calculateTotalPrice: () => void;
   calculateCartCount: () => number;
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (productId: number) => void;
@@ -42,4 +42,6 @@ export interface ButtonProps {
   onClick?: () => void;
   className?: string;
   children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'danger' | 'no-style' | string;
+  size?: 'sm' | 'md';
 }

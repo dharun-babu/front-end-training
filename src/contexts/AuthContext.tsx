@@ -1,27 +1,59 @@
-// AuthContext.tsx
-import React, { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
-  onLogin: (email: string, password: string) => void;
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  setPartialAccess: () => void;
 }
 
-const initialContext: AuthContextType = {
-  onLogin: (email: string, password: string) => {},
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: any) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasPartialAccess, setHasPartialAccess] = useState(false);
+  const navigate = useNavigate();
+
+  const login = (email: string, password: string) => {
+    if (email === "xyz@gmail.com" && password === "amma@123") {
+      setIsAuthenticated(true);
+      setHasPartialAccess(false);
+      navigate("/products"); 
+    } else {
+      alert("Invalid credentials!");
+    }
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    navigate("/login");
+  };
+
+  const setPartialAccess = () => {
+    setIsAuthenticated(false);
+    setHasPartialAccess(true);
+    navigate("/products");
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        setPartialAccess,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const AuthContext = createContext<AuthContextType>(initialContext);
-
-export const AuthProvider: React.FC = ({ children }: any) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleLogin = (email: string, password: string) => {
-    console.log(`Login attempt with Email: ${email} and Password: ${password}`);
-    setLoggedIn(true);
-  };
-
-  const contextValue: AuthContextType = {
-    onLogin: handleLogin,
-  };
-
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };

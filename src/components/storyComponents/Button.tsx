@@ -1,11 +1,12 @@
 import { ButtonProps } from "../../utilies/type/Types";
+import "../../scss/button.scss";
 
-const Button= ({ type = 'button', onClick, className = '', children } : ButtonProps) => {
+const Button= ({ type = 'button', onClick, variant = 'primary', className = '', children , size="md"} : ButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${className}`}
+      className={`${size} ${variant} ${className}`}
     >
       {children}
     </button>

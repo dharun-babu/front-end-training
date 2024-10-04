@@ -1,6 +1,6 @@
 export const navItems = [
   { text: 'Products', path: '/products' },
-  { text: 'Cart', path: '/cart' },
-  { text: 'Wishlist', path: '/wishlist' },
-  { text: 'Profile', path: '/profile' },
+  { text: 'Cart', path: '/products/cart' },
+  { text: 'Wishlist', path: '/products/wishlist' },
+  { text: 'Profile', path: '/products/profile' },
 ];

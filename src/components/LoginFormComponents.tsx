@@ -49,8 +49,9 @@ const LoginFormComponents: React.FC<LoginFormProps> = ({ onLogin }) => {
           placeholder="Enter your password"
         />
       </div>
-      <div className="flex flex-row items-center justify-center">
-        <Button type="submit">Sign In</Button>
+      <div className="w-full flex flex-row items-center justify-between">
+        <Button type="submit">Login</Button>
+        <Button type="button">Stay Sign Out</Button>
       </div>
     </form>
   );

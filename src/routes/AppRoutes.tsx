@@ -17,17 +17,11 @@ function AppRoutes() {
       <Route path="/" element={<MainLayout onLogin={handleLogin} />}>
         <Route index element={<Navigate to="/login" replace />} />
         <Route path="login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="products/*" element={<ContentLayout />}>
+        <Route path="products" element={<ContentLayout />}>
           <Route index element={<ProductsPage />} />
-        </Route>
-        <Route path="cart" element={<ContentLayout />}>
-          <Route index element={<CartPage />} />
-        </Route>
-        <Route path="wishlist" element={<ContentLayout />}>
-          <Route index element={<WishlistPage />} />
-        </Route>
-        <Route path="profile" element={<ContentLayout />}>
-          <Route index element={<ProfilePage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="wishlist" element={<WishlistPage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
     </Routes>

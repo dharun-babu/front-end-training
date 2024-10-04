@@ -27,7 +27,7 @@ const WishlistComponents = ({ item } : Props) => {
         <div>
           <Button
             onClick={() => handleRemoveFromWishlist(item.id)}
-            className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
+						variant="danger"
           >
             Remove
           </Button>

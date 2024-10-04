@@ -1,69 +1,65 @@
-import { useContext } from "react";
+import React, { useContext, useCallback, useMemo } from "react";
 import { ProductContext } from "../contexts/ProductContext";
-import { ProductContextType, CartItem, WishlistItem } from "../utilies/type/Types";
+import { ProductContextType, CartItem, WishlistItem, Product } from "../utilies/type/Types";
 import Button from "../components/storyComponents/Button";
 import Icon from "./Icon";
 import QuantityControlComponents from "./QuantityControlComponents";
 
-const ProductDisplay = ({ product }: { product: any }) => {
-  const { addToCart, addToWishlist, cartItems, wishlistItems, removeFromWishlist } = useContext(
-    ProductContext
-  ) as ProductContextType;
+const ProductDisplay = (props: { product: Product }) => {
+  const { addToCart, addToWishlist, cartItems, wishlistItems, removeFromWishlist } = useContext(ProductContext) as ProductContextType;
+
+  const isInCart = useMemo(
+    () => cartItems.some((item: CartItem) => item.id === props.product.id),
+    [cartItems, props.product.id]
+  );
+
+  const isInWishlist = useMemo(
+    () => wishlistItems.some((item: WishlistItem) => item.id === props.product.id),
+    [wishlistItems, props.product.id]
+  );
+
+  const cartItem = useMemo(
+    () => cartItems.find((item: CartItem) => item.id === props.product.id),
+    [cartItems, props.product.id]
+  );
+
+  const handleAddToCart = useCallback(() => {
+    addToCart(props.product);
+  }, [addToCart, props.product]);
+
+  const handleAddToWishlist = useCallback(() => {
+    addToWishlist(props.product);
+  }, [addToWishlist, props.product]);
+
+  const handleRemoveFromWishlist = useCallback(() => {
+    removeFromWishlist(props.product.id);
+  }, [removeFromWishlist, props.product.id]);
 
   return (
-    <li className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <li key={props.product.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="w-full h-full">
         <img
-          src={`${product.image}`}
-          alt={product.name}
+          src={`${props.product.image}`}
+          alt={props.product.name}
           className="w-full h-64 object-cover object-center"
         />
         <div className="p-4">
-          <h2 className="text-gray-900 font-bold text-xl mb-2">
-            {product.name}
-          </h2>
-          <p className="text-gray-700 text-base mb-4">${product.price}</p>
+          <h2 className="text-gray-900 font-bold text-xl mb-2">{props.product.name}</h2>
+          <p className="text-gray-700 text-base mb-4">Rs. {props.product.price}</p>
           <div className="flex justify-between items-center">
-            {cartItems.some((item: CartItem) => item.id === product.id) ? (
-              cartItems
-                .filter((item: CartItem) => item.id === product.id)
-                .map((item: CartItem) => (
-                  <QuantityControlComponents
-                    productId={item.id}
-                    initialCount={item.count}
-                  />
-                ))
+            {isInCart ? (
+              <QuantityControlComponents productId={props.product.id} initialCount={cartItem?.count || 0} />
             ) : (
-              <Button
-                onClick={() => addToCart(product)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-sm"
-              >
+              <Button onClick={handleAddToCart} variant="primary">
                 Add to Cart
               </Button>
             )}
-            {wishlistItems.some(
-              (item: WishlistItem) => item.id === product.id
-            ) ? (
-              wishlistItems
-                .filter((item: WishlistItem) => item.id === product.id)
-                .map((item: WishlistItem) => (
-                  <Button onClick={() => removeFromWishlist(item.id) }
-									className="" >
-									<Icon
-                    iconName="heart"
-                    fill="white"
-                    width="20px"
-                    height="20px"
-                    color="white"
-                    key={item.id}
-                  />
-									</Button>
-                ))
+            {isInWishlist ? (
+              <Button onClick={handleRemoveFromWishlist} variant="no-style">
+                <Icon iconName="heart" fill="red" width="24px" height="24px" color="red" />
+              </Button>
             ) : (
-              <Button
-                onClick={() => addToWishlist(product)}
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-sm"
-              >
+              <Button onClick={handleAddToWishlist} variant="secondary">
                 Add to Wishlist
               </Button>
             )}
@@ -74,4 +70,4 @@ const ProductDisplay = ({ product }: { product: any }) => {
   );
 };
 
-export default ProductDisplay;
+export default React.memo(ProductDisplay);
