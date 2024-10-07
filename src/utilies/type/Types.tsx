@@ -13,18 +13,13 @@ export interface CartItem extends Product {
 export interface WishlistItem extends Product {}
 
 export interface ProductContextType {
-  products: Product[];
   cartItems: CartItem[];
   wishlistItems: WishlistItem[];
   addToCart: (product: Product) => void;
 	decrementFromCart: (ProductId : number) => void;
   removeFromCart: (productId: number) => void;
-  calculateTotalPrice: () => void;
-  calculateCartCount: () => number;
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (productId: number) => void;
-  isInWishlist: (productId: number) => boolean;
-	calculateWishlistCount: () => number;
 }
 
 
@@ -44,4 +39,26 @@ export interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'danger' | 'no-style' | string;
   size?: 'sm' | 'md';
+}
+
+
+export interface ProductDisplayProps {
+  product: Product;
+  handleAuthCheck: (callback: () => void) => void;
+}
+
+export interface AuthContextType {
+  isAuthenticated: boolean;
+  hasPartialAccess: boolean;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  setPartialAccess: () => void;
+}
+
+export interface IconProps {
+  iconName: string;
+  fill?: string;
+  width?: string;
+  height?: string;
+  color?: string;
 }

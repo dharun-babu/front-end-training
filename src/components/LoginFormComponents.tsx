@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TextInput from '../components/storyComponents/TextInput'; 
-import Button from '../components/storyComponents/Button';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import TextInput from "../components/storyComponents/TextInput";
+import Button from "../components/storyComponents/Button";
 
-interface LoginFormProps {
-  onLogin: (email: string, password: string) => void;
-}
-
-const LoginFormComponents: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginFormComponents = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, setPartialAccess } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email !== '' && password !== '') {
-      console.log('Navigation triggered');
-      onLogin(email, password);
-      navigate('/products');
+    if (email !== "" && password !== "") {
+      login(email, password);
     } else {
-      alert('Please enter valid credentials.');
+      alert("Please enter valid credentials.");
     }
+  };
+
+  const handleStaySignOut = () => {
+    setPartialAccess();
+    navigate("/products");
   };
 
   return (
     <form className="w-full max-w-sm" onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="email"
+        >
           Email
         </label>
         <TextInput
@@ -38,7 +42,10 @@ const LoginFormComponents: React.FC<LoginFormProps> = ({ onLogin }) => {
         />
       </div>
       <div className="mb-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="password"
+        >
           Password
         </label>
         <TextInput
@@ -51,7 +58,9 @@ const LoginFormComponents: React.FC<LoginFormProps> = ({ onLogin }) => {
       </div>
       <div className="w-full flex flex-row items-center justify-between">
         <Button type="submit">Login</Button>
-        <Button type="button">Stay Sign Out</Button>
+        <Button type="button" onClick={handleStaySignOut}>
+          Stay Sign Out
+        </Button>
       </div>
     </form>
   );

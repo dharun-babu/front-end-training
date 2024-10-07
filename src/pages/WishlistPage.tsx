@@ -2,12 +2,14 @@ import { useContext } from 'react';
 import { ProductContext } from '../contexts/ProductContext';
 import { ProductContextType, WishlistItem } from '../utilies/type/Types';
 import WishlistComponents from '../components/WishListComponents';
+import NoItemsComponent from '../components/NoItemsComponents';
+import { EMPTY_WISHLIST } from '../constants/constants';
 
 const WishlistPage = () => {
   const { wishlistItems } = useContext(ProductContext) as ProductContextType;
 
-  if (!wishlistItems) {
-    return <div>Loading...</div>;
+  if (wishlistItems.length === 0) {
+    return <NoItemsComponent iconName='addwishlist' message={EMPTY_WISHLIST}/>;
   }
 
   return (

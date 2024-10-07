@@ -1,15 +1,23 @@
-import React, { createContext, useState, useMemo, useCallback } from 'react';
-import { Products } from '../data/ProductsDate';
+import React, { createContext, useState } from 'react';
 import { Product, CartItem, WishlistItem, ProductContextType } from '../utilies/type/Types';
 
-export const ProductContext = createContext<ProductContextType | undefined>(undefined);
+const defaultProductContext: ProductContextType = {
+  cartItems: [],
+  wishlistItems: [],
+  addToCart: () => {},
+  removeFromCart: () => {},
+  decrementFromCart: () => {},
+  addToWishlist: () => {},
+  removeFromWishlist: () => {},
+};
+
+export const ProductContext = createContext<ProductContextType>(defaultProductContext);
 
 const ProductContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [products] = useState<Product[]>(Products);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
 
-  const addToCart = useCallback((product: Product) => {
+  const addToCart = (product: Product) => {
     const existingIndex = cartItems.findIndex((item) => item.id === product.id);
     if (existingIndex !== -1) {
       setCartItems((prevItems) =>
@@ -22,13 +30,13 @@ const ProductContextProvider = ({ children }: { children: React.ReactNode }) => 
     } else {
       setCartItems((prevItems) => [...prevItems, { ...product, count: 1, total: product.price }]);
     }
-  }, [cartItems]);
+  };
 
-	const removeFromCart = useCallback((productId: number) => {
+  const removeFromCart = (productId: number) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-  }, []);
+  };
 
-  const decrementFromCart = useCallback((productId: number) => {
+  const decrementFromCart = (productId: number) => {
     const existingIndex = cartItems.findIndex((item) => item.id === productId);
     if (existingIndex !== -1) {
       const currentItem = cartItems[existingIndex];
@@ -44,64 +52,28 @@ const ProductContextProvider = ({ children }: { children: React.ReactNode }) => 
         removeFromCart(productId);
       }
     }
-  }, [cartItems, removeFromCart]);
+  };
 
-  const calculateTotalPrice = useCallback(() => {
-    return cartItems.reduce((total, item) => total + item.total + 10, 0);
-  }, [cartItems]);
-
-  const calculateCartCount = useCallback(() => {
-    return cartItems.length;
-  }, [cartItems]);
-
-	const isInWishlist = useCallback((productId: number) => {
-    return wishlistItems.some((item) => item.id === productId);
-  }, [wishlistItems]);
-
-  const addToWishlist = useCallback((product: Product) => {
-    if (!isInWishlist(product.id)) {
+  const addToWishlist = (product: Product) => {
+		const isInWishlist = wishlistItems.some((item) => item.id === product.id);
+    if (! isInWishlist) {
       setWishlistItems((prevItems) => [...prevItems, product]);
     }
-  }, [wishlistItems, isInWishlist]);
+  };
 
-  const removeFromWishlist = useCallback((productId: number) => {
+  const removeFromWishlist = (productId: number) => {
     setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-  }, []);
+  };
 
-  const calculateWishlistCount = useCallback(() => {
-    return wishlistItems.length;
-  }, [wishlistItems]);
-
-  const value = useMemo(
-    () => ({
-      products,
-      cartItems,
-      wishlistItems,
-      addToCart,
-      decrementFromCart,
-      removeFromCart,
-      calculateTotalPrice,
-      calculateCartCount: () => calculateCartCount(),
-      addToWishlist,
-      removeFromWishlist,
-      isInWishlist,
-      calculateWishlistCount: () => calculateWishlistCount(),
-    }),
-    [
-      products,
-      cartItems,
-      wishlistItems,
-      addToCart,
-      decrementFromCart,
-      removeFromCart,
-      calculateTotalPrice,
-      calculateCartCount,
-      addToWishlist,
-      removeFromWishlist,
-      isInWishlist,
-      calculateWishlistCount,
-    ]
-  );
+  const value: ProductContextType = {
+		cartItems,
+		wishlistItems,
+    addToCart,
+    removeFromCart,
+    decrementFromCart,
+    addToWishlist,
+    removeFromWishlist
+  };
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>;
 };

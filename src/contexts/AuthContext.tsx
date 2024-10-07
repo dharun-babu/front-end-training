@@ -1,45 +1,50 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "../data/UserData";
+import { AuthContextType } from "../utilies/type/Types";
+import { INVALID, PRODUCTS, LOGIN } from "../constants/constants";
 
-interface AuthContextType {
-  isAuthenticated: boolean;
-  login: (email: string, password: string) => void;
-  logout: () => void;
-  setPartialAccess: () => void;
+interface AuthContextProp {
+  children: ReactNode;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: any) => {
+export const AuthProvider = ({ children }: AuthContextProp) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasPartialAccess, setHasPartialAccess] = useState(false);
   const navigate = useNavigate();
 
   const login = (email: string, password: string) => {
-    if (email === "xyz@gmail.com" && password === "amma@123") {
+    const user = UserData.find(
+      (user: any) => user.email === email && user.password === password
+    );
+    if (user) {
       setIsAuthenticated(true);
       setHasPartialAccess(false);
-      navigate("/products"); 
+      navigate(PRODUCTS);
     } else {
-      alert("Invalid credentials!");
+      alert(INVALID);
     }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    navigate("/login");
+    setHasPartialAccess(false);
+    navigate(LOGIN);
   };
 
   const setPartialAccess = () => {
     setIsAuthenticated(false);
     setHasPartialAccess(true);
-    navigate("/products");
+    navigate(PRODUCTS);
   };
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
+        hasPartialAccess,
         login,
         logout,
         setPartialAccess,

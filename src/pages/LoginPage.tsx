@@ -1,7 +1,6 @@
-import { LoginPageProps } from "../utilies/type/Types";
 import LoginFormComponents from "../components/LoginFormComponents";
 
-const LoginPage = ({ onLogin }: LoginPageProps) => {
+const LoginPage = () => {
   return (
     <div className="w-full max-h-screen flex items-center justify-center bg-blue-500 overflow-hidden">
       <div className="w-6/12 h-screen flex flex-col justify-center items-center text-white relative">
@@ -19,7 +18,7 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
         <div className="w-5/6 h-full absolute top-0 right-2/4 transform translate-x-2/3 rounded-l-full bg-white flex items-center justify-center">
           <div className="w-2/3">
             <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-            <LoginFormComponents onLogin={onLogin} />
+            <LoginFormComponents />
           </div>
         </div>
       </div>

@@ -10,10 +10,6 @@ interface Props {
 const WishlistComponents = ({ item } : Props) => {
   const { removeFromWishlist } = useContext(ProductContext) as ProductContextType;
 
-  const handleRemoveFromWishlist = (productId: number) => {
-    removeFromWishlist(productId);
-  };
-
   return (
     <li key={item.id}>
       <div className="h-30 flex items-center justify-between border-b py-2">
@@ -26,7 +22,7 @@ const WishlistComponents = ({ item } : Props) => {
         </div>
         <div>
           <Button
-            onClick={() => handleRemoveFromWishlist(item.id)}
+            onClick={() => removeFromWishlist(item.id)}
 						variant="danger"
           >
             Remove

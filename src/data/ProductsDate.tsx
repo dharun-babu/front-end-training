@@ -3,7 +3,7 @@ import WristWatch from "../assets/image/pexels-pixabay-277319.jpg";
 import Phone from "../assets/image/pexels-luckysam-47261.jpg";
 import OverHead from "../assets/image/pexels-kinkate-205926.jpg";
 
-export const Products = [
+const Products = [
     { id: 1, name: 'Camera', price: 10, image: Camera },
     { id: 2, name: 'WristWatch', price: 20, image: WristWatch },
     { id: 3, name: 'Phone', price: 30, image: Phone},
@@ -13,3 +13,5 @@ export const Products = [
     { id: 7, name: 'OverHead', price: 40, image: OverHead },
     { id: 8, name: 'OverHead', price: 40, image: OverHead },
 ];
+
+export default Products;
