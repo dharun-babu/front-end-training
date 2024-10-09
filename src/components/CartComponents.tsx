@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import { ACTIONS } from "../enums/Actions";
 import { ProductContextType, CartItem } from "../utilies/type/Types";
-import Button from "../components/storyComponents/Button";
+import { VARIANTS } from "../enums/variants";
 import QuantityControlComponents from "./QuantityControlComponents";
-import { BUTTONS } from "../enums/button";
+import Button from "../components/storyComponents/Button";
 
 interface CartComponentsProps {
   item: CartItem;
@@ -46,7 +46,7 @@ const CartComponents = ({ item }: CartComponentsProps) => {
               onClick={() =>
                 dispatch({ type: ACTIONS.REMOVE_FROM_CART, payload: item.id })
               }
-              variant={BUTTONS.DANGER}
+              variant={VARIANTS.DANGER}
             >
               Remove
             </Button>

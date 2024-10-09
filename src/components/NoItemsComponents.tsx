@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { PRODUCTS } from "../constants/constants";
 import { NoItemsComponentProps } from "../utilies/type/Types";
+import { VARIANTS } from "../enums/variants";
 import Button from "./storyComponents/Button";
 import Icon from "./Icon";
-import { BUTTONS } from "../enums/button";
 
 const NoItemsComponent = ({ iconName, message }: NoItemsComponentProps) => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const NoItemsComponent = ({ iconName, message }: NoItemsComponentProps) => {
         />
       </div>
       <h2 className="text-2xl font-bold text-gray-600">{message}</h2>
-      <Button onClick={() => navigate(PRODUCTS)} variant={BUTTONS.PRIMARY}>
+      <Button onClick={() => navigate(PRODUCTS)} variant={VARIANTS.PRIMARY}>
         Go To Products
       </Button>
     </div>

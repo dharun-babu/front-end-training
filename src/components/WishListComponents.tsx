@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import { ProductContextType, WishlistItem } from "../utilies/type/Types";
 import { ACTIONS } from "../enums/Actions";
+import { VARIANTS } from "../enums/variants";
 import Button from "../components/storyComponents/Button";
-import { BUTTONS } from "../enums/button";
 
 interface WishListProps {
   item: WishlistItem;
@@ -31,7 +31,7 @@ const WishlistComponents = ({ item }: WishListProps) => {
             onClick={() =>
               dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: item.id })
             }
-            variant={BUTTONS.DANGER}
+            variant={VARIANTS.DANGER}
           >
             Remove
           </Button>

@@ -1,8 +1,10 @@
 import { ButtonProps } from "../../utilies/type/Types";
+import { VARIANTS } from "../../enums/variants";
+import { BUTTON_STYLE } from "../../enums/ButtonStyle";
+import { BUTTON_SIZE } from "../../enums/ButtonSize";
 import "../../scss/button.scss";
-import { BUTTONS } from "../../enums/button";
 
-const Button= ({ type = 'button', onClick, variant = BUTTONS.PRIMARY, className = '', children , size="md"} : ButtonProps) => {
+const Button= ({ type = BUTTON_STYLE.BUTTON, onClick, variant = VARIANTS.PRIMARY, className = '', children , size= BUTTON_SIZE.MD} : ButtonProps) => {
   return (
     <button
       type={type}

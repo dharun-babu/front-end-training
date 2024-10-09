@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import TextInput from "../components/storyComponents/TextInput";
-import Button from "../components/storyComponents/Button";
-import { INVALID, PRODUCTS } from "../constants/constants";
 import { UserData } from "../data/UserData";
 import { UserType } from "../utilies/type/Types";
 import { ACTIONS } from "../enums/Actions";
+import { BUTTON_STYLE } from "../enums/ButtonStyle";
+import { INVALID, PRODUCTS } from "../constants/constants";
+import Button from "../components/storyComponents/Button";
+import TextInput from "../components/storyComponents/TextInput";
 
 const LoginFormComponents = () => {
   const [email, setEmail] = useState("");
@@ -70,8 +71,8 @@ const LoginFormComponents = () => {
         />
       </div>
       <div className="w-full flex flex-row items-center justify-between">
-        <Button type="submit">Login</Button>
-        <Button type="button" onClick={handleStaySignOut}>
+        <Button type={BUTTON_STYLE.SUBMIT}>Login</Button>
+        <Button type={BUTTON_STYLE.BUTTON} onClick={handleStaySignOut}>
           Stay Sign Out
         </Button>
       </div>

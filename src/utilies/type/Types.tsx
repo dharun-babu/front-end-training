@@ -1,4 +1,6 @@
-import { BUTTONS } from "../../enums/button";
+import { BUTTON_SIZE } from "../../enums/ButtonSize";
+import { BUTTON_STYLE } from "../../enums/ButtonStyle";
+import { VARIANTS } from "../../enums/variants";
 
 export interface Product {
   id: number;
@@ -30,12 +32,12 @@ export interface LoginPageProps {
 }
 
 export interface ButtonProps {
-  type?: "button" | "submit" | "reset";
+  type?: BUTTON_STYLE.BUTTON | BUTTON_STYLE.SUBMIT | BUTTON_STYLE.RESET;
   onClick?: () => void;
   className?: string;
   children: React.ReactNode;
-  variant?: BUTTONS.PRIMARY | BUTTONS.SECONDARY | BUTTONS.DANGER | BUTTONS.SUCCESS | BUTTONS.NO_STYLE;
-  size?: "sm" | "md";
+  variant?: VARIANTS.PRIMARY | VARIANTS.SECONDARY | VARIANTS.DANGER | VARIANTS.SUCCESS | VARIANTS.NO_STYLE;
+  size?: BUTTON_SIZE.SM | BUTTON_SIZE.MD;
 }
 
 export interface ProductDisplayProps {

@@ -1,4 +1,4 @@
-export enum BUTTONS {
+export enum VARIANTS {
 	PRIMARY = 'primary',
 	SECONDARY = 'secondary',
 	NO_STYLE = 'no-style',

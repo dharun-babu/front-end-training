@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { ACTIONS } from "../enums/Actions";
 import { LOGIN } from "../constants/constants";
 import Button from "../components/storyComponents/Button";
-import { BUTTONS } from "../enums/button";
+import { VARIANTS } from "../enums/variants";
 
 function ProfilePage() {
 	const {dispatch} = useAuth();
@@ -15,7 +15,7 @@ function ProfilePage() {
 		})
 		navigate(LOGIN)
 	}
-  return <div><Button onClick={handleLogout} variant={BUTTONS.DANGER}>Logout</Button></div>;
+  return <div><Button onClick={handleLogout} variant={VARIANTS.DANGER}>Logout</Button></div>;
 }
 
 export default ProfilePage;

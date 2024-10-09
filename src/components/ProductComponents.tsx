@@ -8,7 +8,7 @@ import Button from "../components/storyComponents/Button";
 import Icon from "./Icon";
 import QuantityControlComponents from "./QuantityControlComponents";
 import withAuthCheck from "./withAuthCheck";
-import { BUTTONS } from "../enums/button";
+import { VARIANTS } from "../enums/variants";
 
 const ProductDisplay = ({product, handleAuthCheck}: ProductDisplayProps) => {
   const {
@@ -54,12 +54,12 @@ const ProductDisplay = ({product, handleAuthCheck}: ProductDisplayProps) => {
                 initialCount={cartItem ? cartItem.count : 0}
               />
             ) : (
-              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_CART, payload: product }))} variant={BUTTONS.PRIMARY}>
+              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_CART, payload: product }))} variant={VARIANTS.PRIMARY}>
                 Add to Cart
               </Button>
             )}
             {isInWishlist ? (
-              <Button onClick={() => dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: product.id })} variant={BUTTONS.DANGER}>
+              <Button onClick={() => dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: product.id })} variant={VARIANTS.DANGER}>
                 <Icon
                   iconName= {ICONS.HEART}
                   fill="red"
@@ -69,7 +69,7 @@ const ProductDisplay = ({product, handleAuthCheck}: ProductDisplayProps) => {
                 />
               </Button>
             ) : (
-              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_WISHLIST, payload: product }))} variant={BUTTONS.SECONDARY}>
+              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_WISHLIST, payload: product }))} variant={VARIANTS.SECONDARY}>
                 Add to Wishlist
               </Button>
             )}
