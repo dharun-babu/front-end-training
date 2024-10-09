@@ -1,3 +1,4 @@
+import { ICONS } from "../enums/Icons";
 import { IconProps } from "../utilies/type/Types";
 
 const HeartLogo = ({
@@ -94,14 +95,14 @@ const AddWishListLogo = ({
 
 const Icon = ({ iconName, ...restProps }: IconProps) => {
   switch (iconName.toLowerCase()) {
-    case "heart":
+    case ICONS.HEART:
       return <HeartLogo {...restProps} />;
-    case "cartempty":
+    case ICONS.EMPTY_CART:
       return <CartEmptyLogo {...restProps} />;
-    case "addwishlist":
+    case ICONS.ADD_WISHLIST:
       return <AddWishListLogo {...restProps} />;
     default:
-      return <span>Icon not found</span>;
+      return <span> ICON_NOT_FOUND </span>;
   }
 };
 

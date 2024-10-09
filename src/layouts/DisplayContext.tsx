@@ -1,11 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 function DisplayContext() {
-	return (
-		<div className="">
-			<Outlet/>
-		</div>
-	)
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }
 
-export default DisplayContext
+export default DisplayContext;

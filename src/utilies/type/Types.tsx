@@ -1,3 +1,5 @@
+import { BUTTONS } from "../../enums/button";
+
 export interface Product {
   id: number;
   name: string;
@@ -15,16 +17,11 @@ export interface WishlistItem extends Product {}
 export interface ProductContextType {
   cartItems: CartItem[];
   wishlistItems: WishlistItem[];
-  addToCart: (product: Product) => void;
-	decrementFromCart: (ProductId : number) => void;
-  removeFromCart: (productId: number) => void;
-  addToWishlist: (product: Product) => void;
-  removeFromWishlist: (productId: number) => void;
+  dispatch: (action: ActionProps) => void;
 }
 
-
 export interface QuantityControl {
-  productId: number;
+  product: Product;
   initialCount: number;
 }
 
@@ -33,14 +30,13 @@ export interface LoginPageProps {
 }
 
 export interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'danger' | 'no-style' | string;
-  size?: 'sm' | 'md';
+  variant?: BUTTONS.PRIMARY | BUTTONS.SECONDARY | BUTTONS.DANGER | BUTTONS.SUCCESS | BUTTONS.NO_STYLE;
+  size?: "sm" | "md";
 }
-
 
 export interface ProductDisplayProps {
   product: Product;
@@ -50,9 +46,7 @@ export interface ProductDisplayProps {
 export interface AuthContextType {
   isAuthenticated: boolean;
   hasPartialAccess: boolean;
-  login: (email: string, password: string) => void;
-  logout: () => void;
-  setPartialAccess: () => void;
+  dispatch: (action : ActionProps) => void
 }
 
 export interface IconProps {
@@ -61,4 +55,24 @@ export interface IconProps {
   width?: string;
   height?: string;
   color?: string;
+}
+
+export interface ProductState {
+  cartItems: CartItem[];
+  wishlistItems: WishlistItem[];
+}
+
+export interface ActionProps {
+  type: string;
+  payload?: any;
+}
+
+export interface UserType {
+  email: string;
+  password: string;
+}
+
+export interface NoItemsComponentProps {
+  iconName: string;
+  message: string;
 }

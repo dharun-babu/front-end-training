@@ -1,9 +1,8 @@
+import { Product } from "../utilies/type/Types";
 import Products from "../data/ProductsDate";
-import {Product } from '../utilies/type/Types';
-import ProductComponents from '../components/ProductComponents';
+import ProductComponents from "../components/ProductComponents";
 
-const ProductsPage = () => { 
-
+const ProductsPage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">Products Page</h1>

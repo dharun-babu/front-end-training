@@ -1,15 +1,21 @@
-import { useContext } from 'react';
-import { ProductContext } from '../contexts/ProductContext';
-import { ProductContextType, WishlistItem } from '../utilies/type/Types';
-import WishlistComponents from '../components/WishListComponents';
-import NoItemsComponent from '../components/NoItemsComponents';
-import { EMPTY_WISHLIST } from '../constants/constants';
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
+import { ProductContextType, WishlistItem } from "../utilies/type/Types";
+import { ICONS } from "../enums/Icons";
+import { EMPTY_WISHLIST } from "../constants/constants";
+import WishlistComponents from "../components/WishListComponents";
+import NoItemsComponent from "../components/NoItemsComponents";
 
 const WishlistPage = () => {
   const { wishlistItems } = useContext(ProductContext) as ProductContextType;
 
   if (wishlistItems.length === 0) {
-    return <NoItemsComponent iconName='addwishlist' message={EMPTY_WISHLIST}/>;
+    return (
+      <NoItemsComponent
+        iconName={ICONS.ADD_WISHLIST}
+        message={EMPTY_WISHLIST}
+      />
+    );
   }
 
   return (

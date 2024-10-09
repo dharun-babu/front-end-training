@@ -1,20 +1,26 @@
-import { useContext } from 'react';
-import { ProductContext} from '../contexts/ProductContext';
-import Button from '../components/storyComponents/Button';
-import { ProductContextType, WishlistItem } from '../utilies/type/Types';
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
+import { ProductContextType, WishlistItem } from "../utilies/type/Types";
+import { ACTIONS } from "../enums/Actions";
+import Button from "../components/storyComponents/Button";
+import { BUTTONS } from "../enums/button";
 
-interface Props {
+interface WishListProps {
   item: WishlistItem;
 }
 
-const WishlistComponents = ({ item } : Props) => {
-  const { removeFromWishlist } = useContext(ProductContext) as ProductContextType;
+const WishlistComponents = ({ item }: WishListProps) => {
+  const { dispatch } = useContext(ProductContext) as ProductContextType;
 
   return (
     <li key={item.id}>
       <div className="h-30 flex items-center justify-between border-b py-2">
         <div className="flex items-center space-x-4">
-          <img src={`${item.image}`} alt={item.name} className="w-20 h-20 object-cover" />
+          <img
+            src={`${item.image}`}
+            alt={item.name}
+            className="w-20 h-20 object-cover"
+          />
           <div>
             <div>{item.name}</div>
             <div>${item.price}</div>
@@ -22,8 +28,10 @@ const WishlistComponents = ({ item } : Props) => {
         </div>
         <div>
           <Button
-            onClick={() => removeFromWishlist(item.id)}
-						variant="danger"
+            onClick={() =>
+              dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: item.id })
+            }
+            variant={BUTTONS.DANGER}
           >
             Remove
           </Button>

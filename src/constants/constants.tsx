@@ -9,3 +9,6 @@ export const EMPTY_CART = "Your cart item is empty"
 export const EMPTY_WISHLIST = "Your wishlist item is empty"
 export const INVALID = "Invalid email/password"
 export const REQUEST_FOR_LOGIN = 'Please log in to continue.'
+export const ICON_NOT_FOUND = 'Icon not found.'
+// error message 
+export const AUTH_ERRO_MESSAGE = 'useAuth must be used within an AuthProvider'

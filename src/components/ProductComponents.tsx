@@ -1,70 +1,67 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
-import {
-  ProductContextType,
-  CartItem,
-  WishlistItem,
-} from "../utilies/type/Types";
+import { ProductContextType, CartItem, WishlistItem } from "../utilies/type/Types";
 import { ProductDisplayProps } from "../utilies/type/Types";
+import { ACTIONS } from "../enums/Actions";
+import { ICONS } from "../enums/Icons";
 import Button from "../components/storyComponents/Button";
 import Icon from "./Icon";
 import QuantityControlComponents from "./QuantityControlComponents";
 import withAuthCheck from "./withAuthCheck";
+import { BUTTONS } from "../enums/button";
 
-const ProductDisplay = (props: ProductDisplayProps) => {
+const ProductDisplay = ({product, handleAuthCheck}: ProductDisplayProps) => {
   const {
-    addToCart,
-    addToWishlist,
+    dispatch,
     cartItems,
     wishlistItems,
-    removeFromWishlist,
   } = useContext(ProductContext) as ProductContextType;
 
   const isInCart = cartItems.some(
-    (item: CartItem) => item.id === props.product.id
+    (item: CartItem) => item.id === product.id
   );
 
   const isInWishlist = wishlistItems.some(
-    (item: WishlistItem) => item.id === props.product.id
+    (item: WishlistItem) => item.id === product.id
   );
 
   const cartItem = cartItems.find(
-    (item: CartItem) => item.id === props.product.id
+    (item: CartItem) => item.id === product.id
   );
 
   return (
     <li
-      key={props.product.id}
+      key={product.id}
       className="bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div className="w-full h-full">
         <img
-          src={`${props.product.image}`}
-          alt={props.product.name}
+          src={`${product.image}`}
+          alt={product.name}
           className="w-full h-64 object-cover object-center"
         />
         <div className="p-4">
           <h2 className="text-gray-900 font-bold text-xl mb-2">
-            {props.product.name}
+            {product.name}
           </h2>
           <p className="text-gray-700 text-base mb-4">
-            Rs. {props.product.price}
+            Rs. {product.price}
           </p>
           <div className="flex justify-between items-center">
             {isInCart ? (
               <QuantityControlComponents
-                productId={props.product.id}
+                product={ product}
                 initialCount={cartItem ? cartItem.count : 0}
               />
             ) : (
-              <Button onClick={() => props.handleAuthCheck(() => addToCart(props.product))} variant="primary">
+              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_CART, payload: product }))} variant={BUTTONS.PRIMARY}>
                 Add to Cart
               </Button>
             )}
             {isInWishlist ? (
-              <Button onClick={() => removeFromWishlist(props.product.id)} variant="no-style">
+              <Button onClick={() => dispatch({ type: ACTIONS.REMOVE_FROM_WISHLIST, payload: product.id })} variant={BUTTONS.DANGER}>
                 <Icon
-                  iconName="heart"
+                  iconName= {ICONS.HEART}
                   fill="red"
                   width="24px"
                   height="24px"
@@ -72,7 +69,7 @@ const ProductDisplay = (props: ProductDisplayProps) => {
                 />
               </Button>
             ) : (
-              <Button onClick={() => props.handleAuthCheck(() => addToWishlist(props.product))} variant="secondary">
+              <Button onClick={() => handleAuthCheck(() => dispatch({ type: ACTIONS.ADD_TO_WISHLIST, payload: product }))} variant={BUTTONS.SECONDARY}>
                 Add to Wishlist
               </Button>
             )}

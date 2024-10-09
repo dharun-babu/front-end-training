@@ -3,25 +3,38 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import TextInput from "../components/storyComponents/TextInput";
 import Button from "../components/storyComponents/Button";
+import { INVALID, PRODUCTS } from "../constants/constants";
+import { UserData } from "../data/UserData";
+import { UserType } from "../utilies/type/Types";
+import { ACTIONS } from "../enums/Actions";
 
 const LoginFormComponents = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, setPartialAccess } = useAuth();
+  const { dispatch} = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email !== "" && password !== "") {
-      login(email, password);
+    if (
+      email !== "" &&
+      password !== "" &&
+      UserData.find(
+        (user: UserType) => user.email === email && user.password === password
+      )
+    ) {
+			dispatch ({
+				type: ACTIONS.LOGIN
+			})
+			navigate(PRODUCTS)
     } else {
-      alert("Please enter valid credentials.");
+      alert(INVALID);
     }
   };
 
   const handleStaySignOut = () => {
-    setPartialAccess();
-    navigate("/products");
+		dispatch({type: ACTIONS.SET_PARTIAL_ACCESS})
+    navigate(PRODUCTS);
   };
 
   return (

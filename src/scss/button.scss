@@ -9,7 +9,7 @@ $green-700: #15803d;
 $white: #ffffff;
 
 .sm {
-	padding: 0.5rem 0.8rem;
+  padding: 0.5rem 0.8rem;
 }
 
 .md {
@@ -18,8 +18,8 @@ $white: #ffffff;
 
 .button {
   display: inline-block;
-	justify-content: center;
-	align-items: center;
+  justify-content: center;
+  align-items: center;
   font-size: 0.875rem;
   border-radius: 0.25rem;
   font-weight: 700;
@@ -56,30 +56,29 @@ $white: #ffffff;
 }
 
 .danger {
-	@extend .button;
-	background-color: $red-500;
-	color: $white;
+  @extend .button;
+  background-color: $red-500;
+  color: $white;
 
-	&:hover {
-		background-color: $red-700;
-	}
+  &:hover {
+    background-color: $red-700;
+  }
 }
 
-.success{
-	@extend .button;
-	background-color: $green-500;
-	color: $white;
+.success {
+  @extend .button;
+  background-color: $green-500;
+  color: $white;
 
-	&:hover{
-		background-color: $green-700;
-	}
+  &:hover {
+    background-color: $green-700;
+  }
 }
 
-.no-style{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	background-color: $white;
+.no-style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
 }
-

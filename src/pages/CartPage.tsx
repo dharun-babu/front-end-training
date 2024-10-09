@@ -1,16 +1,19 @@
 import { useContext } from "react";
+import { EMPTY_CART } from "../constants/constants";
 import { ProductContext } from "../contexts/ProductContext";
 import { ProductContextType } from "../utilies/type/Types";
+import { ICONS } from "../enums/Icons";
 import CartComponents from "../components/CartComponents";
 import SummaryComponents from "../components/SummaryComponents";
 import NoItemsComponent from "../components/NoItemsComponents";
-import { EMPTY_CART } from "../constants/constants";
 
 const CartPage = () => {
   const { cartItems } = useContext(ProductContext) as ProductContextType;
 
   if (cartItems.length === 0) {
-    return <NoItemsComponent iconName="cartempty" message={EMPTY_CART} />;
+    return (
+      <NoItemsComponent iconName={ICONS.EMPTY_CART} message={EMPTY_CART} />
+    );
   }
 
   return (

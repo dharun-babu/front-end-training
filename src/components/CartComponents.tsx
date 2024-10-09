@@ -1,15 +1,17 @@
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
+import { ACTIONS } from "../enums/Actions";
 import { ProductContextType, CartItem } from "../utilies/type/Types";
 import Button from "../components/storyComponents/Button";
 import QuantityControlComponents from "./QuantityControlComponents";
+import { BUTTONS } from "../enums/button";
 
 interface CartComponentsProps {
   item: CartItem;
 }
 
 const CartComponents = ({ item }: CartComponentsProps) => {
-  const { removeFromCart } = useContext(ProductContext) as ProductContextType;
+  const { dispatch } = useContext(ProductContext) as ProductContextType;
 
   return (
     <div className="flex items-center justify-between border-b py-2 bg-white rounded-lg mb-5">
@@ -33,17 +35,19 @@ const CartComponents = ({ item }: CartComponentsProps) => {
         </div>
       </div>
       <div className="w-3/6 flex flex-row justify-around items-center">
-        <QuantityControlComponents
-          productId={item.id}
-          initialCount={item.count}
-        />
+        <QuantityControlComponents product={item} initialCount={item.count} />
         <div className="flex flex-row justify-around items-center">
           <div className="mr-5">
             <span className="text-xl font-bold text-center">Total :</span> Rs{" "}
             {item.total} /-
           </div>
           <div>
-            <Button onClick={() => removeFromCart(item.id)} variant="danger">
+            <Button
+              onClick={() =>
+                dispatch({ type: ACTIONS.REMOVE_FROM_CART, payload: item.id })
+              }
+              variant={BUTTONS.DANGER}
+            >
               Remove
             </Button>
           </div>

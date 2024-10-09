@@ -1,53 +1,31 @@
-import { createContext, useState, useContext, ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserData } from "../data/UserData";
+import { createContext, useContext, ReactNode, useReducer } from "react";
 import { AuthContextType } from "../utilies/type/Types";
-import { INVALID, PRODUCTS, LOGIN } from "../constants/constants";
+import { AuthReducer } from "../reducer/AuthReducer";
+import { AUTH_ERRO_MESSAGE } from "../constants/constants";
 
 interface AuthContextProp {
   children: ReactNode;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const initialAuthContextValue: AuthContextType = {
+  isAuthenticated: false,
+  hasPartialAccess: false,
+  dispatch: () => {},
+};
+
+const AuthContext = createContext<AuthContextType>(initialAuthContextValue);
 
 export const AuthProvider = ({ children }: AuthContextProp) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [hasPartialAccess, setHasPartialAccess] = useState(false);
-  const navigate = useNavigate();
-
-  const login = (email: string, password: string) => {
-    const user = UserData.find(
-      (user: any) => user.email === email && user.password === password
-    );
-    if (user) {
-      setIsAuthenticated(true);
-      setHasPartialAccess(false);
-      navigate(PRODUCTS);
-    } else {
-      alert(INVALID);
-    }
-  };
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    setHasPartialAccess(false);
-    navigate(LOGIN);
-  };
-
-  const setPartialAccess = () => {
-    setIsAuthenticated(false);
-    setHasPartialAccess(true);
-    navigate(PRODUCTS);
-  };
-
+  const [authState, dispatch] = useReducer(
+    AuthReducer,
+    initialAuthContextValue
+  );
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated,
-        hasPartialAccess,
-        login,
-        logout,
-        setPartialAccess,
+        isAuthenticated: authState.isAuthenticated,
+        hasPartialAccess: authState.hasPartialAccess,
+        dispatch,
       }}
     >
       {children}
@@ -58,7 +36,7 @@ export const AuthProvider = ({ children }: AuthContextProp) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error(AUTH_ERRO_MESSAGE);
   }
   return context;
 };

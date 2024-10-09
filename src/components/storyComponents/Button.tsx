@@ -1,7 +1,8 @@
 import { ButtonProps } from "../../utilies/type/Types";
 import "../../scss/button.scss";
+import { BUTTONS } from "../../enums/button";
 
-const Button= ({ type = 'button', onClick, variant = 'primary', className = '', children , size="md"} : ButtonProps) => {
+const Button= ({ type = 'button', onClick, variant = BUTTONS.PRIMARY, className = '', children , size="md"} : ButtonProps) => {
   return (
     <button
       type={type}
